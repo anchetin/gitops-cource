@@ -1,0 +1,6 @@
+spec:
+  source:
+    repoURL: https://anchetin.gitlab.yandexcloud.net/anchetin/infra.git
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc

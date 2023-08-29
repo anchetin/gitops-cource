@@ -1,0 +1,8 @@
+spec:
+  source:
+    repoURL: https://anchetin.gitlab.yandexcloud.net/anchetin/infra.git
+    targetRevision: HEAD
+    appsRepoURL: https://anchetin.gitlab.yandexcloud.net/anchetin/todoapp.git
+    appsTargetRevision: HEAD
+  destination:
+    server:  https://158.160.26.71

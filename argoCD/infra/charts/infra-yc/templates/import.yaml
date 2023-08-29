@@ -1,0 +1,48 @@
+# Первым делом импортируем каталог
+apiVersion: resourcemanager.yandex-cloud.jet.crossplane.io/v1alpha1
+kind: Folder
+metadata:
+  name: default
+  annotations:
+    crossplane.io/external-name: "b1g2og3di86439m3p9ul"
+spec:
+  # этот параметр для безопасности
+  # чтобы не удалить каталог при удалении ресурса из kubernetes
+  deletionPolicy: Orphan
+  forProvider:
+    # default – стандартное название каталога по умолчанию
+    # если ваш каталог называется по-другому – указываем это другое имя
+    name: anchetin
+---
+# Следующим шагом импортируем сеть
+kind: Network
+apiVersion: vpc.yandex-cloud.jet.crossplane.io/v1alpha1
+metadata:
+  name: default
+  annotations:
+    crossplane.io/external-name: "enpk78ftbs3fuda800gq"
+spec:
+  deletionPolicy: Orphan
+  forProvider:
+    name: main-network
+    # обратите внимание, что id каталога уже указывать не надо
+    # достаточно использовать референс на другую сущность crossplane
+    folderIdRef:
+      name: default
+---
+# Импортируем подсеть default-ru-central1-b
+kind: Subnet
+apiVersion: vpc.yandex-cloud.jet.crossplane.io/v1alpha1
+metadata:
+  name: default
+  annotations:
+    crossplane.io/external-name: "e2lbtjffjd6jea8jusmu"
+spec:
+  deletionPolicy: Orphan
+  forProvider:
+    networkIdRef:
+      name: default
+    folderIdRef:
+      name: default
+    v4CidrBlocks:
+      - 10.128.10.0/24  # берем из yc vpc subnet get default-ru-central1-b

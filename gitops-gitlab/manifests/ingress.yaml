@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: httpbin
+  annotations:
+    ingress.alb.yc.io/subnets: 
+    ingress.alb.yc.io/external-ipv4-address: 
+    ingress.alb.yc.io/group-name: 
+    ingress.alb.yc.io/security-groups: 
+spec:
+  tls:
+    - hosts:
+        - "httpbin.infra.ychetloud.ru"
+      secretName: yc-certmgr-cert-id-fpqhm62akg4runm9rtip
+  rules:
+    - host: httpbin.infra.ychetloud.ru
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: httpbin
+                port:
+                  number: 80
+

@@ -1,0 +1,6 @@
+dbuser:
+  name: user1
+  password64: # unbase64:
+environment: 
+dbname: 
+zone: ru-central1-b

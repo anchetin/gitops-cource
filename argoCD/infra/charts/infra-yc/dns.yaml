@@ -1,0 +1,15 @@
+apiVersion: dns.yandex-cloud.jet.crossplane.io/v1alpha1
+kind: Recordset
+metadata:
+  name: apps-prod-recordset
+spec:
+  deletionPolicy: Orphan
+  forProvider:
+    zoneId: dns5dv7hmvhs91v4tik3
+    name: "*.apps.ychetloud.ru."
+    type: "A"
+    ttl: 600
+    data:
+      - "158.160.11.114"
+  # providerConfigRef:
+  #   name: ychetloud
